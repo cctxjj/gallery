@@ -5,23 +5,247 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Galerie</title>
     <style>
-        html,body {height:100%; margin:0; background:black; color:white; font-family:Arial,sans-serif; overflow:hidden; transition:background 0.5s ease;}
-        .gallery-container {position:relative; width:100vw; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden;}
-        .background-layer {position:absolute; inset:0; background-image:url('images/background_2.jpg'); background-size:cover; background-position:center; opacity:0.6; filter:brightness(0.6); z-index:0; transition:opacity 0.5s ease;}
-        .image-area {width:100%; height:70%; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; z-index:5;}
-        img#gallery-image {max-height:65vh; max-width:90vw; object-fit:contain; border-radius:1rem; box-shadow:0 0 60px rgba(255,255,255,0.18); border:1px solid rgba(200,200,200,0.3); opacity:0; transform:scale(1.02); transition:opacity 2s ease, transform 2s ease; background:rgba(255,255,255,0.02);}
+        html,body {
+            height:100%;
+            margin:0;
+            background:black;
+            color:white;
+            font-family:Arial,sans-serif;
+            overflow:hidden;
+            transition:background 0.5s ease;
+        }
+
+        .gallery-container {
+            position:relative;
+            width:100vw;
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            overflow:hidden;
+        }
+
+        /* Hintergrund mit leichter Abdunklung */
+        .background-layer {
+            position:absolute;
+            inset:0;
+            background-image:url('images/background_2.jpg');
+            background-size:cover;
+            background-position:center;
+            opacity:0.6;
+            filter:brightness(0.5);
+            z-index:0;
+            transition:opacity 1s ease;
+        }
+
+        /* Bildanzeige */
+        .image-area {
+            width:100%;
+            height:70%;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            position:relative;
+            z-index:5;
+        }
+
+        img#gallery-image {
+            max-height:65vh;
+            max-width:90vw;
+            object-fit:contain;
+            border-radius:1.5rem;
+            box-shadow:0 0 60px rgba(255,255,255,0.15);
+            border:1px solid rgba(255,255,255,0.25);
+            background:linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            backdrop-filter:blur(25px) saturate(180%);
+            opacity:0;
+            transform:scale(1.02);
+            transition:opacity 2s ease, transform 2s ease;
+        }
         img#gallery-image.active {opacity:1; transform:scale(1);}
-        .subtitle-box {margin-top:2rem; color:rgba(255,255,255,0.9); font-size:1.6rem; padding:1rem 2rem; border-radius:1rem; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.25); backdrop-filter:blur(15px) saturate(180%); box-shadow:0 0 30px rgba(255,255,255,0.1); text-align:center; transition:opacity 1s ease; opacity:0; max-width:70%;}
+
+        /* Untertitel im Liquid Glass Stil */
+        .subtitle-box {
+            margin-top:2rem;
+            color:rgba(255,255,255,0.9);
+            font-size:1.6rem;
+            padding:1rem 2rem;
+            border-radius:1rem;
+            background:linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            border:1px solid rgba(255,255,255,0.25);
+            backdrop-filter:blur(20px) saturate(180%);
+            box-shadow:
+                    inset 0 0 30px rgba(255,255,255,0.1),
+                    0 0 40px rgba(255,255,255,0.15);
+            text-align:center;
+            transition:opacity 1.5s ease;
+            opacity:0;
+            max-width:70%;
+        }
         .subtitle-box.visible {opacity:1;}
-        .nav {position:absolute; top:50%; width:100%; display:flex; justify-content:flex-end; transform:translateY(-50%); padding:0 3rem; z-index:20;}
-        .nav button {width:4.5rem; height:4.5rem; border-radius:50%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:white; cursor:pointer; backdrop-filter:blur(20px) saturate(180%); box-shadow:0 0 50px rgba(255,255,255,0.2); font-size:2rem; display:flex; align-items:center; justify-content:center; transition:all .3s ease;}
-        .nav button:hover {background:rgba(255,255,255,0.3); color:black;}
-        .counter-box {position:absolute; left:15%; top:50%; transform:translate(-50%,-50%); padding:1rem 2rem; border-radius:1rem; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.25); backdrop-filter:blur(20px) saturate(180%); box-shadow:0 0 50px rgba(255,255,255,0.15); font-size:2rem; text-align:center; transition:all 0.8s ease; z-index:20;}
-        .exit-btn {position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); padding:1.5rem 3rem; border-radius:1.5rem; border:1px solid rgba(255,255,255,0.3); background:rgba(255,255,255,0.12); color:white; cursor:pointer; backdrop-filter:blur(20px) saturate(180%); box-shadow:0 0 50px rgba(255,255,255,0.2); opacity:0; pointer-events:none; transition:opacity 1s ease; z-index:50;}
+
+        /* Navigation – rechtsbündig, mit Glass-Look */
+        .nav {
+            position:absolute;
+            top:50%;
+            width:100%;
+            display:flex;
+            justify-content:flex-end;
+            transform:translateY(-50%);
+            padding:0 4rem;
+            z-index:20;
+        }
+
+        .nav button {
+            width:6rem;
+            height:6rem;
+            border-radius:50%;
+            background:linear-gradient(145deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+            border:1px solid rgba(255,255,255,0.35);
+            color:white;
+            cursor:pointer;
+            backdrop-filter:blur(25px) saturate(180%);
+            box-shadow:
+                    inset 0 0 30px rgba(255,255,255,0.15),
+                    0 0 80px rgba(255,255,255,0.2);
+            font-size:2.5rem;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            transition:all .5s ease;
+            margin-right:3rem;
+        }
+        .nav button:hover {
+            background:rgba(255,255,255,0.4);
+            color:black;
+            box-shadow:
+                    inset 0 0 50px rgba(255,255,255,0.25),
+                    0 0 100px rgba(255,255,255,0.4);
+        }
+
+        /* Counter links */
+        .counter-box, .text-box {
+            position:absolute;
+            left:12%;
+            transform:translate(-50%,-50%);
+            padding:1rem 2rem;
+            border-radius:1rem;
+            background:linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            border:1px solid rgba(255,255,255,0.25);
+            backdrop-filter:blur(25px) saturate(180%);
+            box-shadow:
+                    inset 0 0 30px rgba(255,255,255,0.1),
+                    0 0 40px rgba(255,255,255,0.15);
+            text-align:center;
+            transition:all 1s ease;
+            z-index:20;
+        }
+
+        .counter-box {
+            top:50%;
+            font-size:2.2rem;
+        }
+
+        .text-box {
+            top:62%;
+            font-size:1.4rem;
+            color:rgba(255,255,255,0.9);
+            white-space:nowrap;
+            overflow:hidden;
+            border-right:2px solid rgba(255,255,255,0.7);
+        }
+
+        @keyframes caret-blink {
+            50% { border-color: transparent; }
+        }
+
+        .text-box.typing {
+            animation: caret-blink 0.8s steps(1) infinite;
+        }
+
+        /* Exit Button im Liquid Look */
+        .exit-btn {
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            padding:1.5rem 3rem;
+            border-radius:2rem;
+            border:1px solid rgba(255,255,255,0.3);
+            background:linear-gradient(145deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+            color:white;
+            cursor:pointer;
+            backdrop-filter:blur(25px) saturate(180%);
+            box-shadow:
+                    inset 0 0 40px rgba(255,255,255,0.15),
+                    0 0 80px rgba(255,255,255,0.25);
+            opacity:0;
+            pointer-events:none;
+            transition:opacity 1.2s ease;
+            z-index:50;
+            font-size:1.4rem;
+        }
         .exit-btn.visible {opacity:1; pointer-events:auto;}
-        .final-text {position:absolute; top:60%; left:50%; transform:translate(-50%,0); color:white; font-size:1.4rem; opacity:0; transition:opacity 1s ease; text-align:center; max-width:70%; z-index:40;}
-        .progress-bar {position:absolute; bottom:0; left:0; height:6px; width:0%; background:linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.3)); transition:width 2s ease; border-radius:3px; z-index:25;}
-        @media (max-width:768px){.subtitle-box{font-size:1rem; max-width:90%;}.nav button{width:3.5rem;height:3.5rem;font-size:1.6rem;}.counter-box{font-size:1.5rem;}}
+
+        /* Finaltext + Zitat */
+        .final-text {
+            position:absolute;
+            top:55%;
+            left:50%;
+            transform:translate(-50%,0);
+            color:white;
+            font-size:1.4rem;
+            opacity:0;
+            transition:opacity 1s ease;
+            text-align:center;
+            max-width:70%;
+            z-index:40;
+        }
+
+        .quote-box {
+            position:absolute;
+            top:68%;
+            left:50%;
+            transform:translate(-50%,0);
+            color:rgba(255,255,255,0.9);
+            font-size:1.2rem;
+            font-style:italic;
+            background:linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            border:1px solid rgba(255,255,255,0.25);
+            padding:1rem 2rem;
+            border-radius:1rem;
+            box-shadow:
+                    inset 0 0 25px rgba(255,255,255,0.1),
+                    0 0 40px rgba(255,255,255,0.15);
+            backdrop-filter:blur(20px) saturate(180%);
+            opacity:0;
+            transition:opacity 1.5s ease;
+            text-align:center;
+            max-width:80%;
+            z-index:35;
+        }
+
+        .quote-box.visible {opacity:1;}
+
+        .progress-bar {
+            position:absolute;
+            bottom:0;
+            left:0;
+            height:6px;
+            width:0%;
+            background:linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.3));
+            transition:width 2s ease;
+            border-radius:3px;
+            z-index:25;
+        }
+
+        @media (max-width:768px){
+            .subtitle-box{font-size:1rem; max-width:90%;}
+            .nav button{width:4rem;height:4rem;font-size:1.8rem;}
+            .counter-box{font-size:1.5rem;}
+        }
     </style>
 </head>
 <body>
@@ -35,43 +259,79 @@
         <button id="next">&gt;</button>
     </div>
     <div class="counter-box" id="counter">0</div>
+    <div class="text-box" id="textBox">Erster Eintrag</div>
     <button id="exit" class="exit-btn">Galerie verlassen</button>
     <div class="progress-bar" id="progress"></div>
+
     <div class="final-text" id="finalText">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+    <div class="quote-box" id="quoteBox">„Hier erscheint später ein Zitat.“</div>
 </div>
 
 <script>
     const gallery = [
-        { src: 'images/background.jpg', subtitle: 'Ethereal Reflections' },
-        { src: 'images/background.jpg', subtitle: 'Shadowscape' },
-        { src: 'images/background.jpg', subtitle: 'Fragmented Memory' }
+        { src: 'images/img_1.jpg', subtitle: 'Stacheln und Draht. Überall.' },
+        { src: 'images/img_2.jpg', subtitle: 'Tatort der Schreibtischmörder?' },
+        { src: 'images/img_3.jpg', subtitle: 'Schornsteine und Bäume - Tod und Leben' },
+        { src: 'images/img_4.jpg', subtitle: 'Kurz nach durchschreiten des Eingangstores. Wirkt fast unschuldig.' },
+        { src: 'images/img_5.jpg', subtitle: 'Baracken' },
+        { src: 'images/img_6.jpg', subtitle: 'Blick von drinnen nach draußen. Oder doch von draußen nach drinnen?' },
+        { src: 'images/img_7.jpg', subtitle: 'Jedes Paar eine verlorene Geschichte' },
+        { src: 'images/img_8.jpg', subtitle: 'Block 21: chirurgische Abteilung' },
+        { src: 'images/img_10.jpg', subtitle: 'Letzter Blick nach oben vor Betreten der Gaskammer' },
+        { src: 'images/img_11.jpg', subtitle: 'Ethereal Reflections' },
+        { src: 'images/img_12.jpg', subtitle: 'Shadowscape' },
+        { src: 'images/img_13.jpg', subtitle: 'Ethereal Reflections' },
+        { src: 'images/img_14.jpg', subtitle: 'Shadowscape' },
+        { src: 'images/img_15.jpg', subtitle: 'Ethereal Reflections' },
+        { src: 'images/img_16.jpg', subtitle: 'Shadowscape' },
+        { src: 'images/img_17.jpg', subtitle: 'Ethereal Reflections' },
+        { src: 'images/img_18.jpg', subtitle: 'Zeichnung eines Kindes auf einer Mauer' },
+        { src: 'images/img_19.jpg', subtitle: 'Zeichnung eines Kindes auf einer Mauer' },
+        { src: 'images/img_20.jpg', subtitle: 'Zeichnung eines Kindes auf einer Mauer' },
+        { src: 'images/img_21.jpg', subtitle: 'Zeichnung eines Kindes auf einer Mauer' }
     ];
-    const steps = [1,3,2,4,1]; // Counter-Schritte
+
+    const steps = [1,3,2,4,1];
     let stepIndex = 0;
+    const texts = ["Erster Gedanke","Ein stiller Übergang","Flüchtige Erinnerung","Nebel aus Glas","Der letzte Blick"];
+    let textIndex = 0;
 
     const imgEl = document.getElementById('gallery-image');
     const subtitle = document.getElementById('subtitle');
     const progressBar = document.getElementById('progress');
     const nextBtn = document.getElementById('next');
     const counterBox = document.getElementById('counter');
+    const textBox = document.getElementById('textBox');
     const exitBtn = document.getElementById('exit');
     const finalText = document.getElementById('finalText');
+    const quoteBox = document.getElementById('quoteBox');
     const bgLayer = document.getElementById('bgLayer');
 
-    let index=0;
-    let counter=0;
+    let index=0, counter=0;
 
     function animateCounter(to){
-        const start=counter;
-        const duration=800;
-        const startTime=performance.now();
+        const start=counter, duration=800, startTime=performance.now();
         function step(ts){
             const progress=Math.min((ts-startTime)/duration,1);
             counterBox.textContent=Math.floor(start + (to-start)*progress);
-            if(progress<1) requestAnimationFrame(step);
-            else counter=to;
+            if(progress<1) requestAnimationFrame(step); else counter=to;
         }
         requestAnimationFrame(step);
+    }
+
+    function typeText(text){
+        textBox.classList.add('typing');
+        textBox.textContent = "";
+        let i=0;
+        const speed = 100;
+        function type(){
+            if(i<text.length){
+                textBox.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else textBox.classList.remove('typing');
+        }
+        type();
     }
 
     function showImage(i){
@@ -91,15 +351,17 @@
         if(index<gallery.length-1){
             index++;
             showImage(index);
-            // Counter erhöhen nach Array
-            const increment=steps[stepIndex%steps.length];
-            animateCounter(counter+increment);
+            const inc=steps[stepIndex%steps.length];
+            animateCounter(counter+inc);
             stepIndex++;
+            textIndex=(textIndex+1)%texts.length;
+            typeText(texts[textIndex]);
         } else {
-            // Ende erreicht: Animation auslösen
             imgEl.classList.remove('active');
             subtitle.classList.remove('visible');
-            nextBtn.style.opacity=0; nextBtn.style.pointerEvents='none';
+            nextBtn.style.opacity=0;
+            nextBtn.style.pointerEvents='none';
+            textBox.style.opacity=0;
             counterBox.style.top='40%';
             counterBox.style.left='50%';
             counterBox.style.transform='translate(-50%,-50%)';
@@ -111,14 +373,14 @@
     exitBtn.addEventListener('click',()=>{
         exitBtn.style.opacity=0;
         exitBtn.style.pointerEvents='none';
-        // Schneller schwarzer Hintergrund
-        bgLayer.style.transition='opacity 0.3s ease';
+        bgLayer.style.transition='opacity 0.2s ease';
         bgLayer.style.opacity=0;
         document.body.style.background='black';
         finalText.style.opacity=1;
+        quoteBox.style.opacity=1;
+        quoteBox.classList.add('visible');
     });
 
-    // Initial
     showImage(0);
     animateCounter(counter);
 </script>

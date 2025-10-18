@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eingang</title>
     <style>
-        html { margin: 0; padding: 0; height: 100%; background: black; color: white; font-family: 'Arial', sans-serif; overflow: hidden;}
-        body {
+        html, body {
             margin: 0;
             padding: 0;
             height: 100%;
             font-family: 'Arial', sans-serif;
+            background: black;
+            color: white;
             overflow: hidden;
+        }
 
-            /* Hintergrundbild korrekt einbinden */
+        body {
             background: url('images/background.jpg') no-repeat center center fixed;
             background-size: cover;
-            background-color: black; /* Fallback-Farbe */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -30,67 +31,192 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
             overflow: hidden;
-            padding: 4rem 2rem;
-            box-sizing: border-box;
-
-            /* Optional: blur overlay */
-            backdrop-filter: blur(5px);
-            background: rgba(0,0,0,0.3); /* leichtes dunkles Overlay für Textlesbarkeit */
         }
 
-
-        h1 { font-size: 4vw; max-font-size: 2.5rem; margin-bottom: 2rem; text-align: center; opacity: 0; transform: translateY(-50px); animation: flyIn 1.5s forwards; }
-        p { font-size: 2vw; max-width: 900px; text-align: center; color: #ccc; margin-bottom: 4rem; opacity: 0; transform: translateY(50px); animation: flyIn 1.5s forwards; animation-delay: 1s; }
-        .enter-btn { padding: 1rem 2rem; border-radius: 9999px; border: 1px solid #888; background: rgba(255,255,255,0.1); color: white; cursor: pointer; transition: all 0.5s; backdrop-filter: blur(5px); font-size: 1.5rem; opacity: 0; animation: fadeIn 1s forwards; animation-delay: 5s; }
-        .enter-btn:hover { background: white; color: black; }
-
-        /* Moderne dezente Formen */
-        .shape { position: absolute; pointer-events: none; animation: floatShapes 8s ease-in-out infinite alternate; }
-        .circle { border-radius: 50%; background: rgba(255,255,255,0.05); }
-        .triangle { width: 0; height: 0; border-left: 5vw solid transparent; border-right: 5vw solid transparent; border-bottom: 10vw solid rgba(255,255,255,0.05); }
-
-        @keyframes flyIn {
-            to { opacity: 1; transform: translateY(0); }
+        /* === LIQUID GLASS FRAME === */
+        .glass-frame {
+            position: relative;
+            padding: 2rem 4rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.18),
+                    rgba(255, 255, 255, 0.05)
+            );
+            backdrop-filter: blur(25px) saturate(180%);
+            box-shadow:
+                    inset 0 0 30px rgba(255, 255, 255, 0.1),
+                    0 0 60px rgba(255, 255, 255, 0.25);
+            overflow: hidden;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .glass-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                    150% 200% at 50% 0%,
+                    rgba(255, 255, 255, 0.25) 0%,
+                    transparent 70%
+            );
+            opacity: 0.25;
+            pointer-events: none;
         }
 
-        @keyframes floatShapes {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-2vw) rotate(15deg); }
-            100% { transform: translateY(0) rotate(0deg); }
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
         }
 
-        /* Responsive adjustments */
+        p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 3rem 0 4rem 0;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px) saturate(180%);
+            box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.08);
+            padding: 1.5rem 2rem;
+        }
+
+        /* === LIQUID GLASS BUTTON === */
+        .enter-btn {
+            position: relative;
+            padding: 1rem 3rem;
+            font-size: 1.3rem;
+            color: white;
+            border: none;
+            border-radius: 2rem;
+            cursor: pointer;
+            background: linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.25),
+                    rgba(255, 255, 255, 0.05)
+            );
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(25px) saturate(180%);
+            box-shadow:
+                    inset 0 0 20px rgba(255, 255, 255, 0.2),
+                    0 0 60px rgba(255, 255, 255, 0.3);
+            transition: all 0.5s ease;
+            overflow: hidden;
+        }
+
+        .enter-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                    120deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.8),
+                    transparent
+            );
+            transform: skewX(-20deg);
+            transition: 0.75s;
+        }
+
+        .enter-btn:hover::before {
+            left: 125%;
+        }
+
+        .enter-btn:hover {
+            color: black;
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow:
+                    inset 0 0 40px rgba(255, 255, 255, 0.3),
+                    0 0 80px rgba(255, 255, 255, 0.5);
+        }
+
+        /* === FLOATING GLASS ORBS === */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(
+                    circle at 30% 30%,
+                    rgba(255, 255, 255, 0.25),
+                    rgba(255, 255, 255, 0.05)
+            );
+            backdrop-filter: blur(25px);
+            box-shadow:
+                    inset 0 0 40px rgba(255, 255, 255, 0.2),
+                    0 0 100px rgba(255, 255, 255, 0.15);
+            animation: float 18s ease-in-out infinite alternate;
+            filter: brightness(1.2);
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-3vw) scale(1.05);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
         @media (max-width: 768px) {
-            h1 { font-size: 8vw; }
-            p { font-size: 4vw; margin-bottom: 3rem; }
-            .triangle { border-left: 10vw solid transparent; border-right: 10vw solid transparent; border-bottom: 15vw solid rgba(255,255,255,0.05); }
-            .circle { width: 15vw !important; height: 15vw !important; }
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .enter-btn {
+                font-size: 1.1rem;
+                padding: 0.8rem 2rem;
+            }
         }
     </style>
 </head>
 <body>
 <div class="intro-screen">
-    <h1>Haben wir gelernt?</h1>
-    <p>Wir entfernen uns von unserer Geschichte.<br>
-        Minute für Minute, Tag für Tag, Jahr für Jahr.<br>
-        Wer berichten konnte, ist von uns gegangen.<br>
-        Wer noch erzählen kann, wird schon bald nicht mehr.<br><br>
-        Die Dystopie der Vergänglichkeit wird zur unbewussten Realität.<br>
-        Haben wir wirklich gelernt?</p>
-    <button class="enter-btn" onclick="location.href='gallery.html'">Galerie betreten</button>
+    <div class="glass-frame">
+        <h1>Haben wir gelernt?</h1>
+    </div>
+    <p>
+        Wir entfernen uns von unserer Geschichte.<br />
+        Minute für Minute, Tag für Tag, Jahr für Jahr.<br />
+        Wer berichten konnte, ist von uns gegangen.<br />
+        Wer noch erzählen kann, wird schon bald nicht mehr.<br /><br />
+        Die Dystopie der Vergänglichkeit wird zur unbewussten Realität.<br />
+        Haben wir wirklich gelernt?
+    </p>
+    <button class="enter-btn" onclick="location.href='gallery.html'">
+        Galerie betreten
+    </button>
 
-    <!-- Dezente Design-Elemente -->
-    <div class="shape circle" style="width: 200px; height: 200px; top: 10%; left: 15%; animation-delay: 0s;"></div>
-    <div class="shape circle" style="width: 150px; height: 150px; bottom: 15%; right: 20%; animation-delay: 2s;"></div>
-    <div class="shape triangle" style="top: 25%; right: 10%; animation-delay: 1s;"></div>
-    <div class="shape triangle" style="bottom: 20%; left: 5%; transform: rotate(45deg); animation-delay: 3s;"></div>
-    <div class="shape circle" style="width: 100px; height: 100px; top: 50%; left: 40%; animation-delay: 4s;"></div>
-    <div class="shape triangle" style="top: 60%; right: 30%; transform: rotate(30deg); animation-delay: 5s;"></div>
+    <!-- Dezent platzierte Glass-Orbs -->
+    <div
+            class="shape"
+            style="width: 220px; height: 220px; top: 8%; left: 5%; animation-delay: 0s;"
+    ></div>
+    <div
+            class="shape"
+            style="width: 160px; height: 160px; bottom: 12%; right: 10%; animation-delay: 2s;"
+    ></div>
+    <div
+            class="shape"
+            style="width: 180px; height: 180px; bottom: 20%; left: 10%; animation-delay: 4s;"
+    ></div>
+    <div
+            class="shape"
+            style="width: 120px; height: 120px; top: 10%; right: 15%; animation-delay: 5s;"
+    ></div>
 </div>
 </body>
 </html>

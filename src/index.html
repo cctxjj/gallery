@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eingang</title>
+    <style>
+        html { margin: 0; padding: 0; height: 100%; background: black; color: white; font-family: 'Arial', sans-serif; overflow: hidden;}
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+
+            /* Hintergrundbild korrekt einbinden */
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-color: black; /* Fallback-Farbe */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-screen {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 4rem 2rem;
+            box-sizing: border-box;
+
+            /* Optional: blur overlay */
+            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.3); /* leichtes dunkles Overlay für Textlesbarkeit */
+        }
+
+
+        h1 { font-size: 4vw; max-font-size: 2.5rem; margin-bottom: 2rem; text-align: center; opacity: 0; transform: translateY(-50px); animation: flyIn 1.5s forwards; }
+        p { font-size: 2vw; max-width: 900px; text-align: center; color: #ccc; margin-bottom: 4rem; opacity: 0; transform: translateY(50px); animation: flyIn 1.5s forwards; animation-delay: 1s; }
+        .enter-btn { padding: 1rem 2rem; border-radius: 9999px; border: 1px solid #888; background: rgba(255,255,255,0.1); color: white; cursor: pointer; transition: all 0.5s; backdrop-filter: blur(5px); font-size: 1.5rem; opacity: 0; animation: fadeIn 1s forwards; animation-delay: 5s; }
+        .enter-btn:hover { background: white; color: black; }
+
+        /* Moderne dezente Formen */
+        .shape { position: absolute; pointer-events: none; animation: floatShapes 8s ease-in-out infinite alternate; }
+        .circle { border-radius: 50%; background: rgba(255,255,255,0.05); }
+        .triangle { width: 0; height: 0; border-left: 5vw solid transparent; border-right: 5vw solid transparent; border-bottom: 10vw solid rgba(255,255,255,0.05); }
+
+        @keyframes flyIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes floatShapes {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-2vw) rotate(15deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 8vw; }
+            p { font-size: 4vw; margin-bottom: 3rem; }
+            .triangle { border-left: 10vw solid transparent; border-right: 10vw solid transparent; border-bottom: 15vw solid rgba(255,255,255,0.05); }
+            .circle { width: 15vw !important; height: 15vw !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="intro-screen">
+    <h1>Haben wir gelernt?</h1>
+    <p>Wir entfernen uns von unserer Geschichte.<br>
+        Minute für Minute, Tag für Tag, Jahr für Jahr.<br>
+        Wer berichten konnte, ist von uns gegangen.<br>
+        Wer noch erzählen kann, wird schon bald nicht mehr.<br><br>
+        Die Dystopie der Vergänglichkeit wird zur unbewussten Realität.<br>
+        Haben wir wirklich gelernt?</p>
+    <button class="enter-btn" onclick="location.href='gallery.html'">Galerie betreten</button>
+
+    <!-- Dezente Design-Elemente -->
+    <div class="shape circle" style="width: 200px; height: 200px; top: 10%; left: 15%; animation-delay: 0s;"></div>
+    <div class="shape circle" style="width: 150px; height: 150px; bottom: 15%; right: 20%; animation-delay: 2s;"></div>
+    <div class="shape triangle" style="top: 25%; right: 10%; animation-delay: 1s;"></div>
+    <div class="shape triangle" style="bottom: 20%; left: 5%; transform: rotate(45deg); animation-delay: 3s;"></div>
+    <div class="shape circle" style="width: 100px; height: 100px; top: 50%; left: 40%; animation-delay: 4s;"></div>
+    <div class="shape triangle" style="top: 60%; right: 30%; transform: rotate(30deg); animation-delay: 5s;"></div>
+</div>
+</body>
+</html>

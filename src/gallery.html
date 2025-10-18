@@ -1,114 +1,126 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Galerie</title>
     <style>
-        html,body{height:100%;margin:0;background:black;color:white;font-family:Arial,sans-serif;overflow:hidden;}
-        .gallery-container{position:relative;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
-        .background-layer{position:absolute;inset:0;background-image:url('images/background_2.jpg');background-size:cover;background-position:center;opacity:0.6;filter:brightness(0.6);z-index:0;}
-        .image-area{width:100%;height:70%;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:5;}
-        img#gallery-image{max-height:70vh;max-width:90vw;object-fit:contain;border-radius:1rem;box-shadow:0 0 60px rgba(255,255,255,0.18);border:1px solid rgba(200,200,200,0.3);opacity:0;transform:scale(1.02);transition:opacity 2s ease, transform 2s ease;background:rgba(255,255,255,0.02);}
-        img#gallery-image.active{opacity:1;transform:scale(1);}
-        .subtitle-box{margin-top:2rem;color:rgba(255,255,255,0.9);font-size:1.4rem;padding:1rem 2rem;border-radius:1rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(15px) saturate(180%);box-shadow:0 0 30px rgba(255,255,255,0.1);text-align:center;transition:opacity 2s ease;opacity:0;max-width:70%;}
-        .subtitle-box.visible{opacity:1;}
-        .nav{position:absolute;top:50%;width:100%;display:flex;justify-content:flex-end;transform:translateY(-50%);padding:0 5%;z-index:20;}
-        .nav button#next{width:5rem;height:5rem;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:white;cursor:pointer;backdrop-filter:blur(20px) saturate(180%);box-shadow:0 0 50px rgba(255,255,255,0.15);font-size:2.2rem;font-weight:bold;display:flex;align-items:center;justify-content:center;transition:all .4s ease;}
-        .nav button#next:hover{background:rgba(255,255,255,0.3);color:black;transform:scale(1.05);}
-        .counter-box{position:absolute;left:5%;top:50%;transform:translateY(-50%);font-size:2.5rem;padding:2rem 3rem;border-radius:1.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(25px) saturate(180%);box-shadow:0 0 60px rgba(255,255,255,0.2);text-align:center;z-index:15;min-width:6rem;transition:all 0.8s ease;}
-        .exit-btn{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);padding:1.5rem 3rem;border-radius:1.5rem;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:white;cursor:pointer;backdrop-filter:blur(20px) saturate(180%);box-shadow:0 0 50px rgba(255,255,255,0.2);opacity:0;pointer-events:none;transition:opacity 1s ease;}
-        .exit-btn.visible{opacity:1;pointer-events:auto;}
-        .progress-bar{position:absolute;bottom:0;left:0;height:6px;width:0%;background:linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.3));transition:width 2s ease;border-radius:3px;z-index:25;}
-        @media(max-width:768px){.subtitle-box{font-size:1rem;max-width:90%;}.nav button#next{width:4.5rem;height:4.5rem;font-size:2rem;}.counter-box{font-size:2rem;padding:1rem 2rem;}}
+        html,body {height:100%; margin:0; background:black; color:white; font-family:Arial,sans-serif; overflow:hidden; transition:background 0.5s ease;}
+        .gallery-container {position:relative; width:100vw; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden;}
+        .background-layer {position:absolute; inset:0; background-image:url('images/background_2.jpg'); background-size:cover; background-position:center; opacity:0.6; filter:brightness(0.6); z-index:0; transition:opacity 0.5s ease;}
+        .image-area {width:100%; height:70%; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; z-index:5;}
+        img#gallery-image {max-height:65vh; max-width:90vw; object-fit:contain; border-radius:1rem; box-shadow:0 0 60px rgba(255,255,255,0.18); border:1px solid rgba(200,200,200,0.3); opacity:0; transform:scale(1.02); transition:opacity 2s ease, transform 2s ease; background:rgba(255,255,255,0.02);}
+        img#gallery-image.active {opacity:1; transform:scale(1);}
+        .subtitle-box {margin-top:2rem; color:rgba(255,255,255,0.9); font-size:1.6rem; padding:1rem 2rem; border-radius:1rem; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.25); backdrop-filter:blur(15px) saturate(180%); box-shadow:0 0 30px rgba(255,255,255,0.1); text-align:center; transition:opacity 1s ease; opacity:0; max-width:70%;}
+        .subtitle-box.visible {opacity:1;}
+        .nav {position:absolute; top:50%; width:100%; display:flex; justify-content:flex-end; transform:translateY(-50%); padding:0 3rem; z-index:20;}
+        .nav button {width:4.5rem; height:4.5rem; border-radius:50%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:white; cursor:pointer; backdrop-filter:blur(20px) saturate(180%); box-shadow:0 0 50px rgba(255,255,255,0.2); font-size:2rem; display:flex; align-items:center; justify-content:center; transition:all .3s ease;}
+        .nav button:hover {background:rgba(255,255,255,0.3); color:black;}
+        .counter-box {position:absolute; left:15%; top:50%; transform:translate(-50%,-50%); padding:1rem 2rem; border-radius:1rem; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.25); backdrop-filter:blur(20px) saturate(180%); box-shadow:0 0 50px rgba(255,255,255,0.15); font-size:2rem; text-align:center; transition:all 0.8s ease; z-index:20;}
+        .exit-btn {position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); padding:1.5rem 3rem; border-radius:1.5rem; border:1px solid rgba(255,255,255,0.3); background:rgba(255,255,255,0.12); color:white; cursor:pointer; backdrop-filter:blur(20px) saturate(180%); box-shadow:0 0 50px rgba(255,255,255,0.2); opacity:0; pointer-events:none; transition:opacity 1s ease; z-index:50;}
+        .exit-btn.visible {opacity:1; pointer-events:auto;}
+        .final-text {position:absolute; top:60%; left:50%; transform:translate(-50%,0); color:white; font-size:1.4rem; opacity:0; transition:opacity 1s ease; text-align:center; max-width:70%; z-index:40;}
+        .progress-bar {position:absolute; bottom:0; left:0; height:6px; width:0%; background:linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.3)); transition:width 2s ease; border-radius:3px; z-index:25;}
+        @media (max-width:768px){.subtitle-box{font-size:1rem; max-width:90%;}.nav button{width:3.5rem;height:3.5rem;font-size:1.6rem;}.counter-box{font-size:1.5rem;}}
     </style>
 </head>
 <body>
 <div class="gallery-container">
-    <div class="background-layer"></div>
+    <div class="background-layer" id="bgLayer"></div>
     <div class="image-area">
         <img id="gallery-image" src="" alt="Artwork" />
         <div id="subtitle" class="subtitle-box"></div>
     </div>
     <div class="nav">
-        <button id="next">›</button>
+        <button id="next">&gt;</button>
     </div>
-    <div id="counter" class="counter-box">0</div>
-    <button id="exit" class="exit-btn" onclick="location.href='index.html'">Galerie verlassen</button>
+    <div class="counter-box" id="counter">0</div>
+    <button id="exit" class="exit-btn">Galerie verlassen</button>
     <div class="progress-bar" id="progress"></div>
+    <div class="final-text" id="finalText">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
 </div>
 
 <script>
-    const gallery=[
-        {src:'images/background.jpg',subtitle:'Ethereal Reflections'},
-        {src:'images/background.jpg',subtitle:'Shadowscape'},
-        {src:'images/background.jpg',subtitle:'Fragmented Memory'}
+    const gallery = [
+        { src: 'images/background.jpg', subtitle: 'Ethereal Reflections' },
+        { src: 'images/background.jpg', subtitle: 'Shadowscape' },
+        { src: 'images/background.jpg', subtitle: 'Fragmented Memory' }
     ];
-    const counterSteps=[1,2,3,5,8];
-    let counterValue=0,stepIndex=0;
+    const steps = [1,3,2,4,1]; // Counter-Schritte
+    let stepIndex = 0;
 
-    const imgEl=document.getElementById('gallery-image');
-    const subtitle=document.getElementById('subtitle');
-    const progressBar=document.getElementById('progress');
-    const nextBtn=document.getElementById('next');
-    const counterBox=document.getElementById('counter');
-    const exitBtnCentral=document.getElementById('exit');
+    const imgEl = document.getElementById('gallery-image');
+    const subtitle = document.getElementById('subtitle');
+    const progressBar = document.getElementById('progress');
+    const nextBtn = document.getElementById('next');
+    const counterBox = document.getElementById('counter');
+    const exitBtn = document.getElementById('exit');
+    const finalText = document.getElementById('finalText');
+    const bgLayer = document.getElementById('bgLayer');
 
     let index=0;
+    let counter=0;
 
-    function animateCounter(value){
-        const start=parseInt(counterBox.textContent);
-        const end=value;
-        let current=start;
-        const step=Math.ceil((end-start)/30);
-        function frame(){
-            current+=step;
-            if(current>=end) current=end;
-            counterBox.textContent=current;
-            if(current<end) requestAnimationFrame(frame);
+    function animateCounter(to){
+        const start=counter;
+        const duration=800;
+        const startTime=performance.now();
+        function step(ts){
+            const progress=Math.min((ts-startTime)/duration,1);
+            counterBox.textContent=Math.floor(start + (to-start)*progress);
+            if(progress<1) requestAnimationFrame(step);
+            else counter=to;
         }
-        frame();
+        requestAnimationFrame(step);
     }
 
     function showImage(i){
-        if(i<gallery.length){
-            const item=gallery[i];
-            imgEl.classList.remove('active');
-            subtitle.classList.remove('visible');
-            setTimeout(()=>{
-                imgEl.src=item.src;
-                imgEl.alt=item.subtitle;
-                subtitle.textContent=item.subtitle;
-                imgEl.classList.add('active');
-                subtitle.classList.add('visible');
-            },2000); // langsamer Übergang
-            progressBar.style.width=((i+1)/gallery.length*100)+'%';
-            const step=counterSteps[stepIndex%counterSteps.length];
-            counterValue+=step;
-            stepIndex++;
-            animateCounter(counterValue);
-            counterBox.style.left='5%';
-            counterBox.style.top='50%';
-            counterBox.style.transform='translateY(-50%)';
-            counterBox.style.fontSize='2.5rem';
-            exitBtnCentral.classList.remove('visible');
-            nextBtn.style.display='flex';
-        } else {
-            imgEl.classList.remove('active');
-            subtitle.classList.remove('visible');
-            nextBtn.style.display='none';
-            progressBar.style.width='100%';
-            counterBox.style.left='50%';
-            counterBox.style.top='40%';
-            counterBox.style.transform='translate(-50%,-50%)';
-            counterBox.style.fontSize='3rem';
-            exitBtnCentral.classList.add('visible');
-        }
+        if(i<0||i>=gallery.length) return;
+        imgEl.classList.remove('active');
+        subtitle.classList.remove('visible');
+        setTimeout(()=>{
+            imgEl.src=gallery[i].src;
+            subtitle.textContent=gallery[i].subtitle;
+            imgEl.classList.add('active');
+            subtitle.classList.add('visible');
+        },200);
+        progressBar.style.width = ((i+1)/gallery.length*100)+'%';
     }
 
-    nextBtn.addEventListener('click',()=>{index++;showImage(index);});
-    window.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){index++;showImage(index);}});
-    window.addEventListener('load',()=>{showImage(0);});
+    nextBtn.addEventListener('click',()=>{
+        if(index<gallery.length-1){
+            index++;
+            showImage(index);
+            // Counter erhöhen nach Array
+            const increment=steps[stepIndex%steps.length];
+            animateCounter(counter+increment);
+            stepIndex++;
+        } else {
+            // Ende erreicht: Animation auslösen
+            imgEl.classList.remove('active');
+            subtitle.classList.remove('visible');
+            nextBtn.style.opacity=0; nextBtn.style.pointerEvents='none';
+            counterBox.style.top='40%';
+            counterBox.style.left='50%';
+            counterBox.style.transform='translate(-50%,-50%)';
+            counterBox.style.fontSize='3rem';
+            exitBtn.classList.add('visible');
+        }
+    });
+
+    exitBtn.addEventListener('click',()=>{
+        exitBtn.style.opacity=0;
+        exitBtn.style.pointerEvents='none';
+        // Schneller schwarzer Hintergrund
+        bgLayer.style.transition='opacity 0.3s ease';
+        bgLayer.style.opacity=0;
+        document.body.style.background='black';
+        finalText.style.opacity=1;
+    });
+
+    // Initial
+    showImage(0);
+    animateCounter(counter);
 </script>
 </body>
 </html>

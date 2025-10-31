@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quellen</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background: black;
+            color: white;
+            overflow: hidden;
+        }
+
+        body {
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sources-screen {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        /* === LIQUID GLASS FRAME === */
+        .glass-frame {
+            position: relative;
+            top: 10%;
+            padding: 2rem 4rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.18),
+            rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(25px) saturate(180%);
+            box-shadow:
+                    inset 0 0 30px rgba(255, 255, 255, 0.1),
+                    0 0 60px rgba(255, 255, 255, 0.25);
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .glass-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(150% 200% at 50% 0%,
+            rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+        }
+
+        .sources-text {
+            top: 15%;
+            position: relative;
+            font-size: 1.2rem;
+            max-width: 900px;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 2rem 0 3rem 0;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px) saturate(180%);
+            box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.08);
+            padding: 2rem;
+            text-align: left;
+            overflow-y: auto;
+            max-height: 70vh;
+        }
+
+        /* Floating Glass Orbs */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%,
+            rgba(255, 255, 255, 0.25),
+            rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(25px);
+            box-shadow:
+                    inset 0 0 40px rgba(255, 255, 255, 0.2),
+                    0 0 100px rgba(255, 255, 255, 0.15);
+            animation: float 18s ease-in-out infinite alternate;
+            filter: brightness(1.2);
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-3vw) scale(1.05); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.5rem; }
+            .sources-text { font-size: 1.1rem; max-width: 90%; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .sources-text { font-size: 1rem; padding: 1.5rem; line-height: 1.4; max-height: 65vh; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .sources-text { font-size: 0.95rem; padding: 1rem; max-height: 60vh; }
+        }
+    </style>
+</head>
+<body>
+<div class="sources-screen">
+    <div class="glass-frame">
+        <h1>Quellen</h1>
+    </div>
+    <div class="sources-text">
+        1. Luftbild gesamter Lagerkomplex: https://www.yadvashem.org/de/stories-from-our-collections/auschwitz-aerial-photos.html (Stand: 31.10.2025) <br/>
+        2. Luftbild Auschwitz Birkenau: https://www.yadvashem.org/de/stories-from-our-collections/auschwitz-aerial-photos.html (Stand: 31.10.2025) <br/>
+        3. Luftbild Stammlager: https://www.cvce.eu/obj/aerial_view_of_the_auschwitz_concentration_camp_poland_25_august_1944-en-2072bd08-3f37-4975-aba3-1c7653b3e53d.html (Stand: 31.10.2025) <br/>
+        4. Alle übrigen Bilder entstammen privater Urhebung im Zuge der Auschwitz-Fahrt Herbst 2024. <br/>
+        5. Deportations- und Opferzahlen nach: Franciszek Piper: <i>Die Zahl der Opfer von Auschwitz</i>. Staatliches Museum Auschwitz, 1993, ISBN 83-85047-17-4 <br/>
+        6. Zitat M. Friedländers entnommen aus: https://zitatsuchmaschine.informatik.hu-berlin.de/quotee/Margot%20Friedl%C3%A4nder?order=relevance (Stand: 31.10.2025) <br/>
+        7. Zitate V. E. Frankls entnommen aus dessen Buch <i>… trotzdem Ja zum Leben sagen. Ein Psychologe erlebt das Konzentrationslager.</i> München 2015, ISBN 978-3-466-36859-4.
+    </div>
+
+    <!-- Floating Glass Orbs -->
+    <div class="shape" style="width: 220px; height: 220px; top: 5%; left: 5%; animation-delay: 0s;"></div>
+    <div class="shape" style="width: 160px; height: 160px; bottom: 12%; right: 10%; animation-delay: 2s;"></div>
+</div>
+</body>
+</html>

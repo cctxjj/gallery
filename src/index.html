@@ -33,6 +33,7 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
+            padding: 2rem;
         }
 
         /* === LIQUID GLASS FRAME === */
@@ -41,27 +42,23 @@
             padding: 2rem 4rem;
             border-radius: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.25);
-            background: linear-gradient(
-                    135deg,
-                    rgba(255, 255, 255, 0.18),
-                    rgba(255, 255, 255, 0.05)
-            );
+            background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.18),
+            rgba(255, 255, 255, 0.05));
             backdrop-filter: blur(25px) saturate(180%);
             box-shadow:
                     inset 0 0 30px rgba(255, 255, 255, 0.1),
                     0 0 60px rgba(255, 255, 255, 0.25);
             overflow: hidden;
+            margin-bottom: 3rem;
         }
 
         .glass-frame::before {
             content: "";
             position: absolute;
             inset: 0;
-            background: radial-gradient(
-                    150% 200% at 50% 0%,
-                    rgba(255, 255, 255, 0.25) 0%,
-                    transparent 70%
-            );
+            background: radial-gradient(150% 200% at 50% 0%,
+            rgba(255, 255, 255, 0.25) 0%, transparent 70%);
             opacity: 0.25;
             pointer-events: none;
         }
@@ -77,7 +74,7 @@
             font-size: 1.3rem;
             max-width: 800px;
             color: rgba(255, 255, 255, 0.85);
-            margin: 3rem 0 4rem 0;
+            margin: 2rem 0 3rem 0;
             line-height: 1.6;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 1rem;
@@ -96,11 +93,9 @@
             border: none;
             border-radius: 2rem;
             cursor: pointer;
-            background: linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.25),
-                    rgba(255, 255, 255, 0.05)
-            );
+            background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.25),
+            rgba(255, 255, 255, 0.05));
             border: 1px solid rgba(255, 255, 255, 0.35);
             backdrop-filter: blur(25px) saturate(180%);
             box-shadow:
@@ -109,6 +104,7 @@
             transition: all 0.5s ease;
             overflow: hidden;
         }
+
 
         .enter-btn::before {
             content: "";
@@ -127,9 +123,7 @@
             transition: 0.75s;
         }
 
-        .enter-btn:hover::before {
-            left: 125%;
-        }
+        .enter-btn:hover::before { left: 125%; }
 
         .enter-btn:hover {
             color: black;
@@ -143,11 +137,9 @@
         .shape {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(
-                    circle at 30% 30%,
-                    rgba(255, 255, 255, 0.25),
-                    rgba(255, 255, 255, 0.05)
-            );
+            background: radial-gradient(circle at 30% 30%,
+            rgba(255, 255, 255, 0.25),
+            rgba(255, 255, 255, 0.05));
             backdrop-filter: blur(25px);
             box-shadow:
                     inset 0 0 40px rgba(255, 255, 255, 0.2),
@@ -158,27 +150,45 @@
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0) scale(1);
-            }
-            50% {
-                transform: translateY(-3vw) scale(1.05);
-            }
-            100% {
-                transform: translateY(0) scale(1);
-            }
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-3vw) scale(1.05); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.8rem; }
+            p { font-size: 1.1rem; margin: 2rem 0; max-width: 90%; }
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
+            h1 { font-size: 2rem; }
             p {
                 font-size: 1rem;
+                padding: 1rem 1.5rem;
+                line-height: 1.5;
+                margin: 1.5rem 0 2rem;
+            }
+            .glass-frame {
+                padding: 1.2rem 2rem;
+                margin-bottom: 2rem;
             }
             .enter-btn {
-                font-size: 1.1rem;
+                font-size: 1rem;
                 padding: 0.8rem 2rem;
+            }
+            .shape {
+                opacity: 0.6;
+                filter: brightness(1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            p { font-size: 0.95rem; padding: 1rem; }
+            .enter-btn {
+                font-size: 0.9rem;
+                padding: 0.7rem 1.6rem;
             }
         }
     </style>
@@ -193,30 +203,19 @@
         Minute für Minute, Tag für Tag, Jahr für Jahr.<br />
         Wer berichten konnte, ist von uns gegangen.<br />
         Wer noch erzählen kann, wird schon bald nicht mehr.<br /><br />
-        Die Dystopie der Vergänglichkeit wird zur unbewussten Realität.<br />
-        Haben wir wirklich gelernt?
+        Die Dystopie der Vergänglichkeit wird zur unbewussten Realität und Gefahr.<br />
+        Haben wir wirklich gelernt?<br />
+        Schließt unsere Zeit, unsere Gesellschaft und unsere Lebenswirklichkeit ein neues Auschwitz wirklich aus? <br />
     </p>
     <button class="enter-btn" onclick="location.href='gallery.html'">
         Galerie betreten
     </button>
 
-    <!-- Dezent platzierte Glass-Orbs -->
-    <div
-            class="shape"
-            style="width: 220px; height: 220px; top: 8%; left: 5%; animation-delay: 0s;"
-    ></div>
-    <div
-            class="shape"
-            style="width: 160px; height: 160px; bottom: 12%; right: 10%; animation-delay: 2s;"
-    ></div>
-    <div
-            class="shape"
-            style="width: 180px; height: 180px; bottom: 20%; left: 10%; animation-delay: 4s;"
-    ></div>
-    <div
-            class="shape"
-            style="width: 120px; height: 120px; top: 10%; right: 15%; animation-delay: 5s;"
-    ></div>
+    <!-- Floating Glass Orbs -->
+    <div class="shape" style="width: 220px; height: 220px; top: 8%; left: 5%; animation-delay: 0s;"></div>
+    <div class="shape" style="width: 160px; height: 160px; bottom: 12%; right: 10%; animation-delay: 2s;"></div>
+    <div class="shape" style="width: 180px; height: 180px; bottom: 20%; left: 10%; animation-delay: 4s;"></div>
+    <div class="shape" style="width: 120px; height: 120px; top: 10%; right: 15%; animation-delay: 5s;"></div>
 </div>
 </body>
 </html>

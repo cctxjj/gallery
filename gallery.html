@@ -384,7 +384,7 @@
             subtitle.textContent = gallery[i].subtitle;
             imgEl.classList.add('active');
             subtitle.classList.add('visible');
-        }, 1000);
+        }, 3000);
         progressBar.style.width = ((i + 1) / gallery.length * 100) + '%';
     }
 
@@ -425,7 +425,7 @@
 
         setTimeout(() => {
             finalSection.classList.add('visible');
-            setTimeout(() => sourceBtn.classList.add('visible'), 1000);
+            setTimeout(() => sourceBtn.classList.add('visible'), 2000);
         }, 100);
     });
 
